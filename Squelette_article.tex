@@ -1,0 +1,133 @@
+\documentclass[a4paper, 12pt]{article}
+
+
+%Gestion biblio
+\bibliographystyle{molecularEcology}
+\usepackage{natbib}
+% \usepackage[colorlinks = false, pagebackref = true]{hyperref}
+% \usepackage{url}
+\setcitestyle{citesep={;},aysep={}}
+
+\usepackage{hyperref}
+
+\usepackage[english]{babel}
+\usepackage{enumitem}
+\usepackage[margin=2.5cm]{geometry}
+
+
+%Gestion des tables
+\usepackage{array}
+\usepackage{rotating}
+\usepackage{afterpage}
+\usepackage{multirow}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\usepackage{setspace}
+\onehalfspace
+
+
+% Equations
+\usepackage{amsmath}
+\usepackage{multicol}
+
+% Couleurs
+\usepackage{xcolor}
+
+%Gestion grahique
+\usepackage{graphicx}
+\usepackage{mathspec}
+\graphicspath{{./Figures/}}
+
+
+% Info pour page de titre
+% \author{Rachel Dubourg \\ Département de biologie \\ Université Laval}
+% \title{Modélisation de systèmes ongulés-loup à l'Est et l'Ouest du Canada. \\
+% \small Modification du modèle initial et observations}
+% \date{Août 2022 - Session été}
+
+\begin{document}
+
+
+% \maketitle
+
+\begin{titlepage}
+	\centering
+	\vspace*{1cm}
+	\Huge
+	\textbf{Modélisation de systèmes ongulés-loup à l'Est et l'Ouest du Canada}
+
+	\vspace{0.5cm}
+	\LARGE
+	Etude de l'impact de la présence d'une proie alternative et de la productivité du milieu
+
+	\vspace{1.5cm}
+
+	\textbf{Rachel Dubourg}
+
+	\vfill
+
+	Session été \\
+	Août 2022
+
+	\vspace{0.8cm}
+
+	\Large
+	Département de Biologie\\
+	Université Laval \\
+	Québec, Canada \\
+	2002 - 08 - 19
+\end{titlepage}
+
+\newpage
+% Avant propose
+% \input{AP.tex}
+
+\newpage
+
+% Introduction et contexte
+% \input{Intro.tex}
+\section{Introduction}
+ \begin{itemize}
+     \item Modèle et biologie
+     \item Contexte spécifique : les espèces/ milieu
+     \item Problématique spécifique au contexte
+ \end{itemize}
+
+\newpage
+% Materiel et methodes
+\section{Matériel et méthodes}
+\input{material_and_methods.tex}
+
+
+\newpage
+% Résultats
+% \input{Resultats.tex}
+
+% \section{Analyse et résultats marquants.}
+
+
+% Ne pas trop s'éloigner de l'élément qui à initier ce papier: le comportement de prédation (innatendu?).
+
+\newpage
+% Discussion
+% \input{Discussion.tex}
+
+% \input{Conclusion.tex}
+% 
+
+% Annexe 
+% \input{Annexe.tex}
+
+
+\newpage
+% Biblio
+\bibliography{Biblio.bib}
+
+
+
+
+
+\end{document}
