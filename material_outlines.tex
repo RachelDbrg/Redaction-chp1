@@ -1,0 +1,87 @@
+\section{Material and methods}
+
+Brève présentation du modèle et éventuellemt forme des équations 
+
+This model can reflect the strength of predation on caribou depeding on the density of the other present prey. 
+
+
+\subsection{Model parameters}
+
+We used data from literature sources to parametrize the model. 
+
+
+Initial densities used were... 
+
+\subsection{Tested productivity values and their impact on vegetation}
+
+We tested 10 values of productivity, ranging from 0 (poor forest productivity) to 1 (high productivity. We estimated productivity could impact deciduous vegetation... 
+
+The model was implemented in R (ver. 3.3.1; R Core Team, 2016), and the package deSolve (Soaetaert et al., 2010) was used to solve ordinary differential equations (see supplementary R code, available online). Final output from the models included the moose, caribou and wolf density (animals/km2) after 800 years, a sufficiently long time for all species to reach equilibrium values for all simulations.
+
+We quantified wolf predation rate on caribou using \cite{messier1994} method, where:
+$predation rate = \frac{total response}{total prey biomass} and total response = fonctional * numerical response$
+
+Pour le point d'inflexion et le delta, peut-on dire qu'on a juste décidé "a la main de forcer le trait" pour prédire les densités dans des cas non observables?
+
+On peut utiliser ce qu'il y a dans le diapo result, page 21 pour justifier: dans le style "on a vu quelque chose et on investigue +"
+
+
+
+
+Juvenile herbivore compartments are composed likewise:
+
+\begin{equation}
+    Juvenile growth rate = Conversion rate of energy invested by parents for reproduction into newborns \times Energy not invested in basal metabolism  - Individuals becoming adults - Density-dependant limitation - Mortality
+\end{equation}
+
+
+Therefore, the adult’s compartment is:
+
+\begin{equation}
+    Adult growth rate = Individuals becoming adults - Density-dependant limitation - Mortality
+\end{equation}
+
+
+Finally, the numerical response of the predator, i.e the number of new predators generated is directly dependent on the number of prey consumed (functional response). Here, we hypothesized that the wolf had a type II functional response (\cite{holling1992}, ==source==). Thus, the wolf population can be modeled with the equation:
+
+\begin{equation}
+    Wolf growth rate = Conversion rate of energy invested by parents for reproduction into newborns \times Energy not invested in basal metabolism - Density-dependant limitation
+\end{equation}
+
+More details about the equations and their parameters can be find in the annex. Those equations were resolved using 4th-order Runge Kutta, for 2000 years projections.
+
+\subsection{Parameter values}
+
+
+\section{Mathématiques}
+\begin{itemize}
+    \item Modèle math
+    \item Périmètre de validité et d'étude des simu.: limites de la pertinence du modèle (Analyse de calibration)
+\end{itemize}
+
+%Validité de l'étude...? Est-ce que toutes les combinaison de tous les paramètres sont toujours valides?
+Pourcentage qui fit avec Messier?
+Dire aussi qu<on a simule des densites qui ne sont pas observables a priori dans la vraie vie
+
+
+\subsection{Présentation des équations et des paramètres dedans}
+
+
+L'ensemble des équations utilisées dans ce modèle sont décrites ci-après : 
+
+\begin{equation}
+\begin{split}
+\label{eq:ens_equations}
+	\frac{dV}{dt} &= v_0\times V \times (1-\frac{V}{k_V}) - E_{VN} \times (N_J + N_A) \\
+	\frac{dU}{dt} &= u_0 \times (1 - \frac{U}{k_U}) - E_{UM} \times (M_J + M_A) - E_{UC} \times (C_J + C_A)\\
+	\frac{dW}{dt} &= w_0 \times (1 - \frac{W}{k_W}) - E_{QW} \times Q\\
+	\frac{dM_J}{dt} &= \chi_M \times (e_{UM}E_{MU} - \mu_M) \times M_A - \tau_M M_J - \frac{m_0}{k_M} \times M_J(M_J + M_A) - E_{M_{J}P} \times P - E_{M_{J}Q} \times Q \\ 
+	\frac{dM_{A}}{dt} &= \tau_M \times M_J - \frac{m_0}{k_M} \times M_A(M_J + M_A) - E_{M_{A}P} \times P \\
+	\frac{dN_J}{dt} &= \chi_N \times (e_{VN}E_{VN} - \mu_N) \times N_A - \tau_N N_J - \frac{n_0}{k_N} \times N_J(N_J + N_A) - E_{N_{J}P} \times P - E_{N_{J}Q} \times Q \\
+	\frac{dN_{A}}{dt} &= \tau_N \times N_J - \frac{n_0}{k_N} \times N_A(N_J + N_A) - E_{N_{A}P} \times P \\
+	\frac{dC_J}{dt} &= \chi_C \times (e_{UC}E_{CU} - \mu_C) \times C_A - \tau_C C_J - \frac{c_0}{k_C} \times C_J(C_J + C_A) - E_{C_{J}P} \times P - E_{C_{J}Q} \times Q\\
+	\frac{dC_{A}}{dt} &= \tau_C \times C_J - \frac{c_0}{k_C} \times C_A(C_J + C_A) - E_{C_{A}P} \times P \\
+	\frac{dP}{dt} &= \chi_P(E_{M_{A}P} + \varepsilon_{MAJ}E_{M_{J}P} + \varepsilon_{MN}(E_{N_{A}P} + \varepsilon_{NAJ}E_{N_{J}P}) +\varepsilon_{MC}(E_{C_{A}P}+\varepsilon_{CAJ}E_{C_{J}P})-\mu_P) \times P - \frac{p_0}{k_P} \times P^2 \\
+	\frac{dQ}{dt} &= \chi_Q(E_{QW} + \varepsilon_{WM}E_{M_{J}Q} + \varepsilon_{WN}E_{N_{J}Q} + \varepsilon_{WC}E_{C_{J}Q})-\mu_Q) \times Q - \frac{q_0}{k_Q} \times Q^2 \\
+\end{split}
+\end{equation}
