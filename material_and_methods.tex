@@ -4,7 +4,7 @@
 
 We used ordinary differential equations (ODE) compartmental mechanistic and determinist model, using on , based on \cite{lamirande2022}. For every species, it includes a growth term, a density-dependent term that limits the growth of the species regarding its carrying capacity, and a mortality term, which is here only due to predation.
 
-Here, our model relies on three trophic levels: vegetation, herbivores (primary consumers) and predator (secondary consumers). We also adapt our model to fit either the Eastern Canadian boreal forest, where only the moose and the caribou are present as prey, and the Western Canadian boreal forest, where deer represent an alternative prey that the predator can feed upon.  Les espèces présentes et leurs interactions sont représentées à la figure: \textcolor{red}{faire schema}. This model can reflect the strength of predation on caribou depeding on the density of the other present prey. 
+Here, our model relies on three trophic levels: vegetation, herbivores (primary consumers) and predator (secondary consumers). We also adapt our model to fit either the Eastern Canadian boreal forest, where only the moose and the caribou are present as prey, and the Western Canadian boreal forest, where deer represent an alternative prey that the predator can feed upon.  Les espèces présentes et leurs interactions sont représentées à la figure: \textcolor{red}{faire schema}. This model can reflect the strength of predation on caribou depending on the density of the other present prey. 
 
 
 Overall, the equations have the general form: 
@@ -12,22 +12,88 @@ Overall, the equations have the general form:
     Species growth rate = growth - density-dependant limitation - mortality
 \end{equation}
 
-Two types of vegetation are available: lichen for caribou and deciduous for moose and deer. We do not consider any competition between vegetation species, but we model the relatively slow growth of lichen compared to deciduous \textcolor{red}{source}. Both species have a limited growth, constrainted by their respective carrying capacities.
-\textcolor{red}{Préciser que ces capacités limites peuvent changer avec les perturbations???}
+Two types of vegetation are available: terrestrial lichen (\textit{Cladonia spp.}) for caribou and deciduous for moose and deer, assuming there is no competition between herbivores that do not feed on the same vegetation. We do not consider any competition between vegetation species, but we model the relatively slow growth of lichen compared to deciduous \textcolor{red}{source}. Both species have a limited growth, constrained by their respective carrying capacities.
+\textcolor{red}{Préciser que ces capacités limites peuvent changer avec les perturbations???}. Additionally, vegetation growth is limited by their consumption by herbivores, expressed as product of type II functional response \textcolor{red}{Spalinger and Hobbs 1992 dans Lamirande} and consumers density. The general form of herbivores \emph{H} consumption on vegetation \emph{V} is: 
 
-Herbivores are separated into two age class, as juveniles are significantly more vulnerable to predators, as they are less able to run from them and unable to defend themselves \textcolor{red}{source}. This distinction also aims at ... as we know caribou population growth rate is mainly influenced by reprodction rate \textcolor{red}{source}. Juvenile recruitment depends on "extra" energy that adults are able to accumulate, after providing enough energy for their own survival. Thus, the model reflects the need to have a "good" environmental quality as a prior for reproduction, as most K-strategy species do 
-\textcolor{red}{source}. 
+\begin{equation}
+	\frac{a_H \times V \times H}{1 + (a_H \times h_{HV} \times V)}
+	\label{}
+\end{equation}
+
+where \emph{a_H} is the foraging area, \emph{H} and \emph{V} are the densities of herbivores and vegetation respectively, and \emph{h_{HV}} is the time per biomass quantity required to process (handle) vegetation. Therefore, vegetation densities declines when herbivores abundances increase. 
+
+
+Herbivores are separated into two age class, as juveniles are significantly more vulnerable to predators, as they are less able to run from them and unable to defend themselves \textcolor{red}{source}. This distinction also aims at ... as we know caribou population growth rate is mainly influenced by reproduction rate \textcolor{red}{source}. Juvenile recruitment depends on "extra" energy that adults are able to accumulate, after providing enough energy for their own survival. Thus, the model reflects the need to have a "good" environmental quality as a prior for reproduction, as most K-strategy species do \textcolor{red}{source}. As such, juvenile growth is expressed as the product of the energy acquired (see equation above) and not invested in metabolic needs \emph{mu}, the number of adults available for reproduction and the conversion factor at which supplementary energy is converted into new individuals. For each herbivore species, juvenile growth is limited by the current population density regarding carrying capacity (following \cite{turchin2003}), and by the predation by wolves, expressed as the product of the functional response of wolf on juveniles and the wolf density. Juveniles then contribute to increasing the "adults" densities, as they are converted at the rate \textcolor{red}{\emph{tau}}, which is the inverse of the time spent in the juvenile phase. Finally, adults densities growth depends on the number of juveniles converted to adults, and populations limitations are the same as the young. 
+
+Finally, as for herbivores, the growth of the population of wolf is expressed as the accumulated energy not invested in survival, the number of adults available for reproduction and the conversion factor at which supplementary energy is converted into new individuals. The population growth is only limited by density-dependent carrying capacity, defined with \cite{messier1994} (equation in fig. 4), but using total prey density. 
 
 
 \subsection{Choix des valeurs des paramètres + citer littérature dont viennent les valeurs}
 %\subsection{Model parametrisation}
-Our simulations were done for two typical Canadian boreal forest sites: one located in the West (Alberta) and the other in the East (Québec). 
 
-In the East, our model simulates the abundance of moose (\textit{Alces alces}), woodland caribou (\textit{Rangifer tarandus}), and wolf (\textit{Canis lupus}). In this system, the two ungulates are not considered to compete: caribou feed only on lichen whereas moose feed on deciduous, such as bushes or leaves. The eastern region of the Canadian boreal forest is considered to have a rather low level of disturbances, even though some populations are more exposed to them (\cite{johnson2019}).
 
-On the contrary, West Canada has a high density of seismic lines and frequent fire cycle, with forests, replaced every 60-100 years (\cite{johnson2019, stewart2020}). As pointed out by \cite{stewart2020}, industrial disturbance density in the caribou range occurred mainly after 1980. For example, if less than 5\% of the Cold Lake caribou range was disturbed by industrial activities in 1980, this value was nearly 80\% in 2006, which stands for an increase of ~3\% of the caribou range disturbed each year.
+The parameters of the model were defined using literature data, with slight variations to best match what is observed in two typical Canadian boreal forest sites: one located in the West (Alberta; hereafter "West") and the other in the East (Québec; hereafter "East") \textcolor{red}{map?}. In the East system, our model simulates the abundance of moose (\textit{Alces alces}), woodland caribou (\textit{Rangifer tarandus}) as prey for the wolf (\textit{Canis lupus}). An additional prey is present in the West, the white-tailed deer, providing an alternative food source for predators \textcolor{red}{source}. 
 
-Moreover, white-tailed deer, another ungulate species, is present and acts as an alternative prey for predators (==source==). This species also feeds on deciduous. Altogether, those conditions are rather unfavorable for caribou and most western caribou populations are in decline (\cite{stewart2020}).
+% Vegetation parameters
+% - initial densities
+% - intrinsic growth rate
+
+Lichen initial biomass was estimated being 5 \times 10^5 kg/km2 (\textcolor{red}{McLoughlin et al. (2019)}) and initial deciduous biomass was higher, at 4 \times 10^5 kg/km2 (\textcolor{red}{Lamirande (2022), pdf 36}). We consider lichen being independent of the productivity, therefore we have a fixed value for its intrinsic growth rate, being 0.06 mm.year^{-1} (\textcolor{red}{exprimer dans la même unité que u0?}), which is relatively slow (\textcolor{red}{\emph{arsenault1997}}). Conversely, deciduous have productivity-dependent growth rate, starting at 30000 kg.km^2.an^{-1}, linearly increasing with the productivity, as suggested by (\textcolor{red}{source}). 
+
+
+
+% Herbivores parameters
+% - initial densities
+
+Herbivores initial densities were defined using observed data, from aerial surveys or estimations based on observations. We thus defined initial densities as $0.08 ind/km^2$ for the caribou (\textcolor{red}{source}), $1.6 ind/km^2$ for moose (\textcolor{red}{source}), $0.08 ind/km^2$ for the wolf (\textcolor{red}{source}), and $2.1 ind/km^2$ for the deer, only for the simulations of the Western system, set as equal to 0 otherwise . 
+
+% - intrinsic growth rate
+% - tau
+% For all herbivores species, maximal intrinsic growth rate was set to 0.25 year^{-1} and is used to determine density-dependent mortality rates (\textcolor{red}{Lamirande (2022), pdf 46}). 
+For all herbivores species, maximal intrinsic growth rate was set to $0.25 year^{-1}$ and transition rate from juvenile to adult was set to $2 year{-1}$, referring to the time it takes for  a juvenile to become adult (\textcolor{red}{source}). 
+
+% - carrying capacities
+Usually, herbivores carrying capacities depends on the quantity of resource available. But, as observed in literature (\textcolor{red}{source}), caribou population tend to exist at low density, even though the conditions are favorable. Thus, we set the carrying capacity of caribou to 0.2 ind/km^2. Both carrying capacities of moose and deer are expressed as dependent of the deciduous quantity, which depends on the productivity value. To determine how the carrying capacity vary with productivity, we draw a linear regression between minimum and maximum species densities observed, regarding the habitat quality. For moose, \cite{neufeld2021} found a density of 0.047 ind/km^2 when the habitat is poor and highest density was found at 0.47 ind/km^2 by \cite{johnson2019}. Therefore, we assumed that those values where obtained for extreme productivity values and helped us build the relationship between productivity, deciduous biomass and moose carrying capacity. Once established, we used this carrying capacity, and the allometric relationship between weights of moose ans deer to estimate, for a same food quantity, the number of individuals that the environment can carry. If we consider the weight of moose being 400kg and that of a deer being 70kg, the relationship between species weight and their energetic need is non linear. 
+
+As for the feeding related parameters, we defined 
+
+FOOD RELATED
+- handling time 
+
+Handling time are defined at the time needed by herbivores to handle and digest a kilogram of vegetation. This depends on the size of the animal, as well as the type of vegetation and the average time spent by animals to feed. Therefore, we define the handling time for caribou on lichen as $3*10^-4 year.kg^{-1}$, $4*10^-4 year.kg^{-1}$ for moose and $14*10^-4 year.kg^{-1}$ for deer feeding on decidous (\textcolor{red}{source}). 
+(\textcolor{red}{chercher pourquoi *0.33 et pourquoi ces valeurs?})
+
+- prospecting area
+We consider that all herbivores species have the same prospecting area, which is 0.05 km2.year^{-1}. 
+
+- NRJ intake from the food
+e_VN = 11.8e3
+e_UM = mu_M * (912.5)^-1
+e_UC = 1.8410e+04
+
+- NRJ for maintenance
+mu_N = 5.7467e+06
+mu_M = 1.5272e+07
+mu_C =  4.3967e+06
+
+- chi
+chi_N = n_croiss * ((a_N * e_VN * kVnorm)
+                    /(1+a_N * h_VN * kVnorm) - mu_N)^-1
+
+
+
+
+
+
+% Predators parameters
+- initial densities
+- intrinsic growth rate
+- handling time
+- prospecting area
+- NRJ intake from the food
+- NRJ for maintenance
+- tau
+- handling time of prey depends on prey biomass?
 
 
 \subsection{Table résumée}
